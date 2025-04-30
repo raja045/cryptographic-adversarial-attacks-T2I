@@ -44,9 +44,11 @@ Install the required packages by running the following commands:
    ```python
    from diffusers import StableDiffusionInpaintPipeline
    
-   pipe_inpaint = StableDiffusionInpaintPipeline.from_pretrained(
-       "/checkpoints/stable-diffusion-inpainting"
-   ).to(device)
+  device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+  pipe_inpaint = StableDiffusionInpaintPipeline.from_pretrained(
+         "../checkpoints/stable-diffusion-2-inpainting",
+      ).to(device)
+
    ```
 ## Usage
 
@@ -56,9 +58,10 @@ To perform the attack, follow these steps:
 
 1. Set the path of the victim model's checkpoint in line 316 of the code `./scr/textual_attack.py`:
    ```python
-   pipe_inpaint = StableDiffusionInpaintPipeline.from_pretrained(
-      "/checkpoints/stable-diffusion-inpainting"
-   ).to(device)
+   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+  pipe_inpaint = StableDiffusionInpaintPipeline.from_pretrained(
+         "../checkpoints/stable-diffusion-2-inpainting",
+      ).to(device)
    ```
    
 2. Set the desired target prompts in line 325 of the code `./scr/textual_attack.py`:
